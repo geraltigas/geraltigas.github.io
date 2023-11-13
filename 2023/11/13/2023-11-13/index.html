@@ -19,31 +19,31 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"geraltigas.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="目的：做毕设，同时学HPC, MLSys相关知识 打算搞LLM的推理加速。学长推荐了篇论文：Full Stack Optimization of Transformer Inference: a Survey这篇论文里面做了一个调查，统计了常见的模型的一个指标arithmetic intensity:$$ \frac{FLOPs}{MOPs} $$这里的MOPs是访存的相关操作的次数（单位时间）论">
+    <meta name="description" content="目的自我感觉逻辑混乱，思考问题没方向。虽然每个领域有每个领域的知识，并且思考某个领域的问题总是需要这个领域知识来指引。但是我曾经听过或者遇到过有希望作为所有领域公共知识的知识，我浅浅了解过的：老四论(System theory, …), 新四论, ZFC, 数理逻辑, 类型理论, 范畴论. 前两个是广义上的万物理论, 后四者是数学领域的”万物理论”. “虽然到了这个年纪还追求这种”屠龙之术”未免">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Operator parallelism">
-<meta property="og:url" content="https://geraltigas.github.io/2023/11/08/2023-11-08/index.html">
+<meta property="og:title" content="数理逻辑，集合论，类型理论，范畴论(Constructing)">
+<meta property="og:url" content="https://geraltigas.github.io/2023/11/13/2023-11-13/index.html">
 <meta property="og:site_name" content="Bo Jiang&#39;s blog">
-<meta property="og:description" content="目的：做毕设，同时学HPC, MLSys相关知识 打算搞LLM的推理加速。学长推荐了篇论文：Full Stack Optimization of Transformer Inference: a Survey这篇论文里面做了一个调查，统计了常见的模型的一个指标arithmetic intensity:$$ \frac{FLOPs}{MOPs} $$这里的MOPs是访存的相关操作的次数（单位时间）论">
+<meta property="og:description" content="目的自我感觉逻辑混乱，思考问题没方向。虽然每个领域有每个领域的知识，并且思考某个领域的问题总是需要这个领域知识来指引。但是我曾经听过或者遇到过有希望作为所有领域公共知识的知识，我浅浅了解过的：老四论(System theory, …), 新四论, ZFC, 数理逻辑, 类型理论, 范畴论. 前两个是广义上的万物理论, 后四者是数学领域的”万物理论”. “虽然到了这个年纪还追求这种”屠龙之术”未免">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-08T10:15:00.000Z">
-<meta property="article:modified_time" content="2023-11-08T10:20:25.492Z">
+<meta property="article:published_time" content="2023-11-13T09:15:00.000Z">
+<meta property="article:modified_time" content="2023-11-13T09:01:18.877Z">
 <meta property="article:author" content="Bo Jiang">
-<meta property="article:tag" content="DL">
-<meta property="article:tag" content="Compiler">
-<meta property="article:tag" content="Cuda">
-<meta property="article:tag" content="AVX">
+<meta property="article:tag" content="Lean">
+<meta property="article:tag" content="Logic">
+<meta property="article:tag" content="Type theory">
+<meta property="article:tag" content="Category theory">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://geraltigas.github.io/2023/11/08/2023-11-08/">
+<link rel="canonical" href="https://geraltigas.github.io/2023/11/13/2023-11-13/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://geraltigas.github.io/2023/11/08/2023-11-08/","path":"2023/11/08/2023-11-08/","title":"Operator parallelism"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://geraltigas.github.io/2023/11/13/2023-11-13/","path":"2023/11/13/2023-11-13/","title":"数理逻辑，集合论，类型理论，范畴论(Constructing)"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Operator parallelism | Bo Jiang's blog</title>
+<title>数理逻辑，集合论，类型理论，范畴论(Constructing) | Bo Jiang's blog</title>
   
 
 
@@ -103,7 +103,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -116,6 +116,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E8%AE%A1%E5%88%92"><span class="nav-number">2.</span> <span class="nav-text">进一步计划</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -166,7 +167,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://geraltigas.github.io/2023/11/08/2023-11-08/">
+    <link itemprop="mainEntityOfPage" href="https://geraltigas.github.io/2023/11/13/2023-11-13/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -179,12 +180,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Operator parallelism | Bo Jiang's blog">
+      <meta itemprop="name" content="数理逻辑，集合论，类型理论，范畴论(Constructing) | Bo Jiang's blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Operator parallelism
+          数理逻辑，集合论，类型理论，范畴论(Constructing)
         </h1>
 
         <div class="post-meta-container">
@@ -196,7 +197,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2023-11-08 18:15:00 / Modified: 18:20:25" itemprop="dateCreated datePublished" datetime="2023-11-08T18:15:00+08:00">2023-11-08</time>
+      <time title="Created: 2023-11-13 17:15:00 / Modified: 17:01:18" itemprop="dateCreated datePublished" datetime="2023-11-13T17:15:00+08:00">2023-11-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -217,27 +218,9 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p><strong>目的</strong>：做毕设，同时学HPC, MLSys相关知识</p>
-<p>打算搞LLM的推理加速。学长推荐了篇论文：Full Stack Optimization of Transformer Inference: a Survey<br>这篇论文里面做了一个调查，统计了常见的模型的一个指标arithmetic intensity:<br>$$ \frac{FLOPs}{MOPs} $$<br>这里的MOPs是访存的相关操作的次数（单位时间）<br>论文中指出LLM的decoder-only transformer在生成阶段的arithmetic intensity是一个常数，约等于2。也就是说，这些算子并没有明显的计算密集型和访存密集型的区别。<br>已知GPU在访存速度和运算速度全面快过CPU。假设如果有很多的访存密集型操作，那可以移动到CPU上进行。由于GPU带宽的限制，访存密集型的操作与CPU速度差别不太大(存疑，我印象中GPU多线程是可以并行访问内存的，虽然总的带宽差不多，但利用率应该差挺多的吧)。<br>到目前为止，异构的收益就剩个利用空闲的cpu这一条好处了。虽然一样会带来数据移动的开销，甚至这个能抵消cpu带来的加速效果。目前就朝这个方向继续进行。<br>关于模型推理中的并行，学长说transformer的算子级并行机会不多。更多是算子内并行。这需要我进一步调查常见LLM模型的算子，尝试算子内并行。</p>
-<p><strong>进一步计划</strong>：</p>
-<ul>
-<li>使用模型可视化工具，查看常见的LLM计算图，并深入了解算子是如何实现的。</li>
-<li>研究transformer相关算子的底层实现，以及学习intel的向量指令集，cuda编程。为高效实现算子内并行提供支撑。</li>
-</ul>
-<hr>
-<p><strong>Purpose</strong>: Conducting a thesis while studying High-Performance Computing (HPC) and Machine Learning Systems (MLSys).</p>
-<p>The plan is to work on accelerating LLM (Language Model) inference. A senior recommended a paper titled “Full Stack Optimization of Transformer Inference: a Survey,” which surveyed a key metric for common models called arithmetic intensity: </p>
-<p>$$ \frac{FLOPs}{MOPs} $$</p>
-<p>Here, MOPs represent the number of memory-related operations (per unit time). The paper indicates that in the case of LLM’s decoder-only transformer during the generation phase, the arithmetic intensity is a constant, approximately equal to 2. This suggests that these operators do not exhibit a significant difference between compute-bound and memory-bound operations.</p>
-<p>It’s known that GPUs generally surpass CPUs in both memory access speed and computational speed. If there are many memory-bound operations, they could potentially be shifted to the CPU for processing. Due to the bandwidth limitations of the GPU, memory-bound operations might not differ significantly in speed between the CPU and GPU (although the general belief may vary; GPUs can effectively utilize parallelism in memory access, even though the total bandwidth might be similar, the efficiency could differ substantially).</p>
-<p>So far, the benefits of heterogeneity mainly revolve around utilizing the idle CPU. However, this might introduce overhead due to data movement, potentially offsetting the acceleration from CPU processing. Current efforts are moving in this direction.</p>
-<p>Regarding parallelism in model inference, the senior mentioned that there might not be many opportunities for operator-level parallelism in transformers. Instead, more parallelism occurs within the operators. This requires further investigation into the operators of common LLM models and attempting intra-operator parallelism.</p>
-<p><strong>Further Plans</strong>:</p>
-<ul>
-<li>Utilize model visualization tools to explore common LLM computation graphs and gain a deep understanding of how operators are implemented.</li>
-<li>Research the underlying implementation of transformer-related operators and study Intel’s vector instruction sets, CUDA programming to support efficient intra-operator parallelism.</li>
-</ul>
-
+    <div class="post-body" itemprop="articleBody"><hr>
+<h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>自我感觉逻辑混乱，思考问题没方向。虽然每个领域有每个领域的知识，并且思考某个领域的问题总是需要这个领域知识来指引。但是我曾经听过或者遇到过有希望作为所有领域公共知识的知识，我浅浅了解过的：老四论(System theory, …), 新四论, ZFC, 数理逻辑, 类型理论, 范畴论. 前两个是广义上的万物理论, 后四者是数学领域的”万物理论”. “虽然到了这个年纪还追求这种”屠龙之术”未免显得太幼稚”,但是哪怕一点点的可能也会让我心生向往. 毕竟, 论期望(E)来说, 这件事也不比其他的所谓很重要的事情更加不重要. 所以, 我打算搞明白 数学四论的关系. 给我自己一个答案.</p>
+<h1 id="进一步计划"><a href="#进一步计划" class="headerlink" title="进一步计划"></a>进一步计划</h1>
     </div>
 
     
@@ -246,21 +229,21 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/DL/" rel="tag"># DL</a>
-              <a href="/tags/Compiler/" rel="tag"># Compiler</a>
-              <a href="/tags/Cuda/" rel="tag"># Cuda</a>
-              <a href="/tags/AVX/" rel="tag"># AVX</a>
+              <a href="/tags/Lean/" rel="tag"># Lean</a>
+              <a href="/tags/Logic/" rel="tag"># Logic</a>
+              <a href="/tags/Type-theory/" rel="tag"># Type theory</a>
+              <a href="/tags/Category-theory/" rel="tag"># Category theory</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2023/11/11/2023-11-11/" rel="prev" title="Coq">
+                  <i class="fa fa-angle-left"></i> Coq
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/11/11/2023-11-11/" rel="next" title="Coq">
-                  Coq <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
