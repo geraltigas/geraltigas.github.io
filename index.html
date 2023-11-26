@@ -123,18 +123,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -151,6 +151,137 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://geraltigas.github.io/2023/11/26/2023-11-26/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bo Jiang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bo Jiang's blog">
+      <meta itemprop="description" content="this is a description">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bo Jiang's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/26/2023-11-26/" class="post-title-link" itemprop="url">Advanced ToDo List Design - Start(Constructing)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-11-26 17:15:00 / Modified: 23:50:45" itemprop="dateCreated datePublished" datetime="2023-11-26T17:15:00+08:00">2023-11-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/creation/" itemprop="url" rel="index"><span itemprop="name">creation</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>我适合某一刻时间只做一件事，同时由于存在心流这种现象，做单一的事情长一点时间速度会更加快。频繁的切换任务并不是明智的选择。如果在完成任务时回忆总体计划会打断任务的上下文，并且经常会导致注意力分散。所以需要高效的任务管理机制来自动化任务管理流程。</p>
+<h1 id="现在的进展"><a href="#现在的进展" class="headerlink" title="现在的进展"></a>现在的进展</h1><h2 id="总体设计"><a href="#总体设计" class="headerlink" title="总体设计"></a>总体设计</h2><p>需要一个<strong>任务容器</strong></p>
+<p>​	以一定的结构组织任务，实现了用户只需要存入任务，设置任务的属性，即可自动编排任务的执行顺序，ddl，依赖关系以及任务的最佳完成时间。同时任务容器抽象来看只会提供 任务导入，任务取出，以及任务触发检测以及提示 这三个功能。</p>
+<p>需要一套<strong>任务导入机制</strong></p>
+<p>​	由于用户自身以及其环境这两个来源带来的未经拆分组织的任务往往十分不规整。太大或者太小，无明确ddl，无明确依赖关系，无优先级等等问题。我需要设计一套任务预处理机制，引导用户自行规整任务，然后再导入容器。</p>
+<p><strong>任务</strong></p>
+<p>定义：需要干的事情</p>
+<p>属性（初版）：</p>
+<ul>
+<li><p>结束：客体达到目标状态(需要不断明确，迭代到能够很容易评估的状态，详见下方的<strong>任务示例分析</strong>)</p>
+</li>
+<li><p>Deadline：结束的最后时间</p>
+</li>
+<li><p>状态：未开始&#x2F;挂起&#x2F;进行中&#x2F;完成…</p>
+</li>
+<li><p>挂起触发器：邮件&#x2F;事件&#x2F;电话&#x2F;时间&#x2F;其他任务&#x2F;外界环境状态&#x2F;暂停</p>
+</li>
+<li><p>依赖关系：与其他任务的关系</p>
+</li>
+<li><p>子任务: Graph<Task>, 要完成该任务需要完成的子任务</p>
+</li>
+</ul>
+<p><strong>TODO</strong>: </p>
+<ul>
+<li>从现在开始对所有要做的事情进行分析，看看这些定义与属性是否足够，还有那些补充，改进？</li>
+<li>为什么没有预计时间？我认为完成任务的时间并不是关键指标，只要能保证我需要做的事情都做完就行了，越快当然就能有越多的空闲时间。</li>
+<li>什么粒度的子任务才是最好的，不可分的？目前的想法是：<ul>
+<li><strong>结束的状态判断简单</strong></li>
+<li><strong>完成任务的流程不会涉及复杂的上下文切换</strong>.</li>
+</ul>
+</li>
+</ul>
+<p><strong>任务示例分析</strong></p>
+<h4 id="调查transformer推理优化目前的进展"><a href="#调查transformer推理优化目前的进展" class="headerlink" title="调查transformer推理优化目前的进展"></a>调查transformer推理优化目前的进展</h4><p><strong>原始任务</strong></p>
+<p>调查transformer推理优化目前的进展</p>
+<p>结束：弄清楚目前优化的主流方向，以及前沿进展，为进一步研究找到前人的基础 -&gt; 组织出关键论文的关系以及可能的发展方向 -&gt; 还是不明确需要<strong>进一步分解</strong></p>
+<p><strong>子任务1</strong></p>
+<p>询问相关领域的前人, 索要论文列表</p>
+<p>结束: 列出的前人给的论文达到了一定的数量,并且能够确认各个方向都有一定的论文</p>
+<p>Deadline: None</p>
+<p>状态: 未开始</p>
+<p>挂起触发器: 无 (因为还没有挂起)</p>
+<p>依赖关系: 继承上层任务的依赖</p>
+<p>子任务: 无 (<strong>结束</strong>设置十分恰当)</p>
+<p><strong>子任务2</strong></p>
+<p>根据论文的引用与被引用关系, 建立论文的关系图, 做好标注</p>
+<p>结束: 建立论文关系图, 明确论文与论文间的关系<br>Deadline: None</p>
+<p>状态: 未开始</p>
+<p>挂起触发器: 无 (因为还没有挂起)</p>
+<p>依赖关系: 任务一</p>
+<p>子任务: 无</p>
+<h1 id="进一步计划"><a href="#进一步计划" class="headerlink" title="进一步计划"></a>进一步计划</h1><p>目前任务的初步组织以及分解功能已经设计完毕. 还需要<strong>设计容器的任务选择功能</strong>, 让用户能直接require一个task, 就能保证这个task是目前最需要做的task. 这部分的涉及一定会导致 前面已经设计好的东西的更改. 同时, 这个系统投入使用也能发现更多的问题, 这就是迭代的任务了.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
