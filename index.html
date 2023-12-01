@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -151,6 +151,122 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://geraltigas.github.io/2023/12/01/2023-12-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bo Jiang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bo Jiang's blog">
+      <meta itemprop="description" content="this is a description">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bo Jiang's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/01/2023-12-01/" class="post-title-link" itemprop="url">React Principles -- from GPT4</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-12-01 15:15:00 / Modified: 15:23:45" itemprop="dateCreated datePublished" datetime="2023-12-01T15:15:00+08:00">2023-12-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/exploration/" itemprop="url" rel="index"><span itemprop="name">exploration</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<h2 id="阶段"><a href="#阶段" class="headerlink" title="阶段"></a>阶段</h2><h3 id="组件初始化"><a href="#组件初始化" class="headerlink" title="组件初始化"></a>组件初始化</h3><ol>
+<li><strong>调用组件函数</strong>：<ul>
+<li>当一个函数式组件首次渲染时，React 调用该组件函数。在这个过程中，执行所有在组件内声明的 Hooks。</li>
+</ul>
+</li>
+<li><strong>创建 Hooks 链表</strong>：<ul>
+<li>对于每个 Hook 调用（如 <code>useState</code>、<code>useEffect</code>），React 在内部为该组件实例化一个链表节点。每个节点存储该 Hook 的状态和其他相关信息。</li>
+<li>这个链表维护了 Hooks 的调用顺序，对于组件的每一次渲染，这个顺序必须保持一致。</li>
+</ul>
+</li>
+<li><strong>初始化状态和效果</strong>：<ul>
+<li>对于 <code>useState</code> 和 <code>useReducer</code>，React 初始化状态并将其存储在链表节点中。</li>
+<li>对于 <code>useEffect</code>，React 记录了副作用函数，但不会立即执行它们。这些副作用函数会在 DOM 更新后的一个微任务中执行。</li>
+</ul>
+</li>
+</ol>
+<h3 id="组件更新（刷新）"><a href="#组件更新（刷新）" class="headerlink" title="组件更新（刷新）"></a>组件更新（刷新）</h3><ol>
+<li><strong>再次调用组件函数</strong>：<ul>
+<li>当组件的 state 或 props 发生变化时，组件会重新渲染。React 再次调用组件函数。</li>
+</ul>
+</li>
+<li><strong>使用现有 Hooks 链表</strong>：<ul>
+<li>React 使用与该组件实例关联的相同 Hooks 链表。对于每个 Hook 调用，React 从链表中检索状态和其他信息。</li>
+<li>这确保了每个 Hook 在不同渲染之间保持状态的连续性。</li>
+</ul>
+</li>
+<li><strong>更新状态和效果</strong>：<ul>
+<li>对于 <code>useState</code> 和 <code>useReducer</code>，React 提供更新函数，允许状态在重新渲染时被更新。</li>
+<li>对于 <code>useEffect</code>，React 会比较依赖数组（如果提供的话）来决定是否需要清理上一个效果并运行新的效果。</li>
+</ul>
+</li>
+</ol>
+<h3 id="整体流程"><a href="#整体流程" class="headerlink" title="整体流程"></a>整体流程</h3><ul>
+<li><strong>一致性检查</strong>：在每次渲染过程中，React 都会检查 Hooks 是否按照相同的顺序和方式被调用。如果发现调用顺序变化，比如由于条件渲染导致的 Hooks 调用顺序不一致，React 会抛出错误。</li>
+<li><strong>副作用处理</strong>：<code>useEffect</code> 和 <code>useLayoutEffect</code> 在渲染过程中收集副作用函数。对于 <code>useEffect</code>，副作用在渲染完成后的微任务中执行，而 <code>useLayoutEffect</code> 的副作用在 DOM 更新后但浏览器绘制前执行。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>React 使用一个精巧的机制来处理函数式组件中的 Hooks。这个机制确保了 Hooks 的状态在组件的不同渲染之间保持一致，同时允许 React 管理组件的生命周期和副作用。通过维护一个固定顺序的 Hooks 链表，并在组件的每次渲染过程中重用这个链表，React 能够高效且准确地处理函数式组件的状态和副作用。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -188,9 +304,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2023-11-26 17:15:00 / Modified: 23:53:14" itemprop="dateCreated datePublished" datetime="2023-11-26T17:15:00+08:00">2023-11-26</time>
+      <time title="Created: 2023-11-26 17:15:00" itemprop="dateCreated datePublished" datetime="2023-11-26T17:15:00+08:00">2023-11-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-11-27 15:51:10" itemprop="dateModified" datetime="2023-11-27T15:51:10+08:00">2023-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
