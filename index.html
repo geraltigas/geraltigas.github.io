@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -151,6 +151,154 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://geraltigas.github.io/2023/12/06/2023-12-06-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bo Jiang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bo Jiang's blog">
+      <meta itemprop="description" content="this is a description">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bo Jiang's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/06/2023-12-06-01/" class="post-title-link" itemprop="url">Task Planning Algorithm</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-12-06 21:15:00 / Modified: 22:44:07" itemprop="dateCreated datePublished" datetime="2023-12-06T21:15:00+08:00">2023-12-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/creation/" itemprop="url" rel="index"><span itemprop="name">creation</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p><strong>任务</strong></p>
+<p>需要做的事</p>
+<ul>
+<li>理论时间：推进任务需要的理论最短时间 &#x2F;&#x2F; 只能估计</li>
+<li>条件：实际花费时间与预计时间的比值，与各种因素有关系 &#x2F;&#x2F; TODO： 搞清楚与哪些有关<ul>
+<li>工具配置</li>
+<li>环境干扰</li>
+<li>疲劳程度</li>
+<li>…</li>
+</ul>
+</li>
+<li>实际时间: 实际花费时间 &#x2F;&#x2F; 相同任务，回归分析</li>
+<li>工作量：某单位，与特定任务相关，需要转化为标准任务量（可以换算为理论时间）</li>
+</ul>
+<p><strong>时间槽</strong></p>
+<p>时间轴上一片片区域。</p>
+<h2 id="事实"><a href="#事实" class="headerlink" title="事实"></a>事实</h2><ul>
+<li>….</li>
+</ul>
+<h2 id="任务规划算法"><a href="#任务规划算法" class="headerlink" title="任务规划算法"></a>任务规划算法</h2><p>效果：</p>
+<ul>
+<li>deadline前一定要达到目标</li>
+<li>花的总时间最少</li>
+</ul>
+<p>策略：</p>
+<ul>
+<li>收集按照任务的依赖关系，收集最小粒度的任务，按照ddl从先排到后</li>
+<li>讲执行任务时的条件尽可能最佳，当达到理论最佳时，只能通过减少中断来减少总时间。</li>
+</ul>
+<p>此策略与最优策略的差别在于：</p>
+<ul>
+<li>需要创造最优条件</li>
+<li>在最优条件的前提下，尽可能减少中断造成的额外时间将是唯一的效率提升办法</li>
+</ul>
+<hr>
+<h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p><strong>Task</strong></p>
+<p>What needs to be done:</p>
+<ul>
+<li>Theoretical Time: The shortest estimated time theoretically needed to complete the task.</li>
+<li>Conditions: The ratio of the actual time spent to the estimated time, influenced by various factors that need to be clarified, such as:<ul>
+<li>Tool configuration</li>
+<li>Environmental disturbances</li>
+<li>Level of fatigue</li>
+<li>…</li>
+</ul>
+</li>
+<li>Actual Time: The real time spent on the task, analyzed through regression for similar tasks.</li>
+<li>Workload: A unit measurement related to a specific task, which needs to be converted into a standard workload (can be converted into theoretical time).</li>
+</ul>
+<p><strong>Time Slot</strong></p>
+<p>Segments of the time axis.</p>
+<h2 id="Facts"><a href="#Facts" class="headerlink" title="Facts"></a>Facts</h2><ul>
+<li>…</li>
+</ul>
+<h2 id="Task-Planning-Algorithm"><a href="#Task-Planning-Algorithm" class="headerlink" title="Task Planning Algorithm"></a>Task Planning Algorithm</h2><p>Effectiveness:</p>
+<ul>
+<li>The goal must be achieved before the deadline.</li>
+<li>Minimize the total time spent.</li>
+</ul>
+<p>Strategy:</p>
+<ul>
+<li>Collect the smallest granularity tasks according to their dependencies and arrange them from earliest to latest deadlines.</li>
+<li>Optimize the conditions for task execution as much as possible. When the optimal conditions are achieved, reducing interruptions is the only way to minimize the total time.</li>
+</ul>
+<p>The difference between this strategy and the optimal strategy lies in:</p>
+<ul>
+<li>The need to create optimal conditions.</li>
+<li>Under optimal conditions, reducing the additional time caused by interruptions will be the only way to improve efficiency.</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -190,7 +338,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2023-12-06 20:15:00 / Modified: 20:34:13" itemprop="dateCreated datePublished" datetime="2023-12-06T20:15:00+08:00">2023-12-06</time>
+      <time title="Created: 2023-12-06 20:15:00 / Modified: 20:37:16" itemprop="dateCreated datePublished" datetime="2023-12-06T20:15:00+08:00">2023-12-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -221,6 +369,15 @@
 <h2 id="进展"><a href="#进展" class="headerlink" title="进展"></a>进展</h2><p>已完成 基于图与子图数据结构 的任务编辑，任务持久化。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/geraltigas/AToDo.git">AToDo github</a></p>
 <h2 id="下一步计划"><a href="#下一步计划" class="headerlink" title="下一步计划"></a>下一步计划</h2><p>设计任务规划算法。</p>
+<hr>
+<p>AToDo is a task management tool that I am currently designing and implementing for my own use.</p>
+<h2 id="Ultimate-Goal"><a href="#Ultimate-Goal" class="headerlink" title="Ultimate Goal"></a>Ultimate Goal</h2><p>The goal is for the tool to assist in planning as soon as I have an idea. Once I break down and import tasks (within the framework set by AToDo), all I need to do is to collect and complete tasks in AToDo.</p>
+<h2 id="Software-Architecture"><a href="#Software-Architecture" class="headerlink" title="Software Architecture"></a>Software Architecture</h2><p>It’s a desktop app based on Tauri.</p>
+<p>Main thread: Rust exposes a series of methods for IPC communication with the UI thread, giving the UI thread access to system interfaces.</p>
+<p>UI thread: Based on the system’s webview, the UI framework is React, using a single global state for a single-page application. The jotai state management library is used for generating derived states and state updates.</p>
+<h2 id="Progress"><a href="#Progress" class="headerlink" title="Progress"></a>Progress</h2><p>I have completed task editing and persistence based on graph and subgraph data structures.</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/geraltigas/AToDo.git">AToDo GitHub</a></p>
+<h2 id="Next-Steps"><a href="#Next-Steps" class="headerlink" title="Next Steps"></a>Next Steps</h2><p>The next step is to design the task planning algorithm.</p>
 
       
     </div>
