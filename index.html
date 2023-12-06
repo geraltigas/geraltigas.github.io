@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -151,6 +151,93 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://geraltigas.github.io/2023/12/06/2023-12-06/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bo Jiang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bo Jiang's blog">
+      <meta itemprop="description" content="this is a description">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bo Jiang's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/06/2023-12-06/" class="post-title-link" itemprop="url">AToDo - Task Editing Done</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-12-06 20:15:00 / Modified: 20:34:13" itemprop="dateCreated datePublished" datetime="2023-12-06T20:15:00+08:00">2023-12-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/creation/" itemprop="url" rel="index"><span itemprop="name">creation</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<p>AToDo, 是一款我正在设计与实现的 给我自己用的任务管理工具。</p>
+<h2 id="最终的目标"><a href="#最终的目标" class="headerlink" title="最终的目标"></a>最终的目标</h2><p>只需要我产生了一个想法，就能通过这个工具的辅助下进行规划。当我讲任务分解，导入（在AToDo规定的框架下）后，我唯一需要做的就是在AToDo领取任务，完成任务。</p>
+<h2 id="软件架构"><a href="#软件架构" class="headerlink" title="软件架构"></a>软件架构</h2><p>基于tauri的桌面端app。</p>
+<p>main线程：rust通过暴露一系列的方法供ui线程进行IPC通信，赋予UI线程访问系统接口的能力。</p>
+<p>UI线程：基于系统自带的webview，ui框架为React，单一页面采用一个全局状态，jotai状态管理库用于产生衍生状态以及状态更新。</p>
+<h2 id="进展"><a href="#进展" class="headerlink" title="进展"></a>进展</h2><p>已完成 基于图与子图数据结构 的任务编辑，任务持久化。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/geraltigas/AToDo.git">AToDo github</a></p>
+<h2 id="下一步计划"><a href="#下一步计划" class="headerlink" title="下一步计划"></a>下一步计划</h2><p>设计任务规划算法。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
