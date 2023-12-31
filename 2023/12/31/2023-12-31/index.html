@@ -27,7 +27,7 @@
 <meta property="og:description" content="已经使用了 ATodo 有一段时间了，感觉很不错。 优点：  再也没有花时间想自己要怎么规划了，只需要按照 ATodo 的提示做就好了。 任何想法都能第一时间整合进我的 ATodo 中，不会放弃一丝可能。 多任务管理已经不存在，只要合理配置 ATodo 任务，任务数量根本不是限制。如果完不成，只能算是时间不不够或者是未检查到的计划冲突。 ATodo 使得长线规划成为可能，兼顾大局与细节。  问题">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-12-31T01:15:00.000Z">
-<meta property="article:modified_time" content="2023-12-31T02:30:53.039Z">
+<meta property="article:modified_time" content="2023-12-31T02:36:07.179Z">
 <meta property="article:author" content="Bo Jiang">
 <meta property="article:tag" content="ToDoList">
 <meta name="twitter:card" content="summary">
@@ -193,7 +193,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2023-12-31 09:15:00 / Modified: 10:30:53" itemprop="dateCreated datePublished" datetime="2023-12-31T09:15:00+08:00">2023-12-31</time>
+      <time title="Created: 2023-12-31 09:15:00 / Modified: 10:36:07" itemprop="dateCreated datePublished" datetime="2023-12-31T09:15:00+08:00">2023-12-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -228,6 +228,7 @@
 <li>任务触发器种类以及自动触发不完善。<ul>
 <li>国内的消息平台如微信和 QQ 过于封闭，没有提供消息接口，无法实现消息触发器。并且由于我以后也不会有机会使用这两个平台进行关键社交和工作，所以不会再考虑支持这两个平台。</li>
 <li>关于周期性任务的自动触发已有详尽，灵活的方案。但还有一些小功能没有实现。</li>
+<li>邮件触发器还未支持，并且以后可能会尝试推展 LLM(Large Language model) 的邮件触发器。</li>
 </ul>
 </li>
 <li>UI 过于丑，真直男审美。不过我本来也没做 UI 优化，等有精力了搞个现代化的 UI。</li>
@@ -235,6 +236,32 @@
 <li>持久化方案太烂，我现在是直接存储 json 对象，以后会转移到 Sqlite 上。</li>
 </ul>
 <p>总的来说，ATodo 是一个很好的工具，不愧我投入的上十天的开发时间。</p>
+<hr>
+<p>I’ve been using ATodo for a while now, and it feels great.</p>
+<p>Pros:</p>
+<ul>
+<li>I no longer have to spend time thinking about how to plan, I just need to do what ATodo suggests.</li>
+<li>Any idea can be integrated into my ATodo immediately, not giving up any possibility.</li>
+<li>Multitasking is no longer an issue, as long as ATodo tasks are reasonably configured, the number of tasks is not a limitation. If it can’t be completed, it’s only because of insufficient time or unchecked plan conflicts.</li>
+<li>ATodo makes long-term planning possible, taking into account both the big picture and the details.</li>
+</ul>
+<p>Problems:</p>
+<ul>
+<li><p>The variety of task triggers and automatic triggering are imperfect.</p>
+<ul>
+<li>Domestic messaging platforms like WeChat and QQ are too closed, without messaging interfaces, making it impossible to implement message triggers. And since I won’t have the chance to use these two platforms for critical social and work interactions in the future, I won’t consider supporting them anymore.</li>
+<li>Regarding automatic triggering of periodic tasks, detailed and flexible solutions exist. But some small features are still missing.</li>
+<li>Email triggers are not yet supported, and in the future, I might try to develop LLM (Large Language Model) based email triggers.</li>
+</ul>
+</li>
+<li><p>The UI is too ugly, truly a straight man’s aesthetic. But I never optimized the UI anyway, I’ll make a modern UI when I have the energy.</p>
+</li>
+<li><p>The React framework is a pain. I’ve done my best at the architectural level, but the coupling between React Hooks, business, and UI is too high, preventing full separation. Compared to Signal, it’s too mentally taxing, and I’ll consider migrating to Preact in the future.</p>
+</li>
+<li><p>The persistence solution is terrible, I’m currently directly storing JSON objects, and will switch to Sqlite in the future.</p>
+</li>
+</ul>
+<p>Overall, ATodo is a great tool, worthy of the more than ten days of development time I put into it.</p>
 
     </div>
 
