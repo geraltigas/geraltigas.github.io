@@ -22,7 +22,7 @@
     <meta name="description" content="this is a description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Bo Jiang&#39;s blog">
-<meta property="og:url" content="https://geraltigas.github.io/tags/Lean/index.html">
+<meta property="og:url" content="https://geraltigas.github.io/page/2/index.html">
 <meta property="og:site_name" content="Bo Jiang&#39;s blog">
 <meta property="og:description" content="this is a description">
 <meta property="og:locale" content="en_US">
@@ -31,14 +31,14 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://geraltigas.github.io/tags/Lean/">
+<link rel="canonical" href="https://geraltigas.github.io/page/2/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"","path":"tags/Lean/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"page/2/index.html","title":""}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Tag: Lean | Bo Jiang's blog</title>
+<title>Bo Jiang's blog</title>
   
 
 
@@ -71,7 +71,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <p class="site-title">Bo Jiang's blog</p>
+      <h1 class="site-title">Bo Jiang's blog</h1>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">this is a subtitle</p>
@@ -150,50 +150,109 @@
 
     </div>
 
-    <div class="main-inner tag posts-collapse">
+    <div class="main-inner index posts-expand">
+
+    
 
 
+<div class="post-block">
   
   
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://geraltigas.github.io/2023/11/08/2023-11-08/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Bo Jiang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bo Jiang's blog">
+      <meta itemprop="description" content="this is a description">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Bo Jiang's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/08/2023-11-08/" class="post-title-link" itemprop="url">Operator parallelism</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-11-08 18:15:00 / Modified: 18:20:25" itemprop="dateCreated datePublished" datetime="2023-11-08T18:15:00+08:00">2023-11-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/exploration/" itemprop="url" rel="index"><span itemprop="name">exploration</span></a>
+        </span>
+    </span>
+
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">Lean
-          <small>Tag</small>
-        </h1>
-      </div>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>目的</strong>：做毕设，同时学HPC, MLSys相关知识</p>
+<p>打算搞LLM的推理加速。学长推荐了篇论文：Full Stack Optimization of Transformer Inference: a Survey<br>这篇论文里面做了一个调查，统计了常见的模型的一个指标arithmetic intensity:<br>$$ \frac{FLOPs}{MOPs} $$<br>这里的MOPs是访存的相关操作的次数（单位时间）<br>论文中指出LLM的decoder-only transformer在生成阶段的arithmetic intensity是一个常数，约等于2。也就是说，这些算子并没有明显的计算密集型和访存密集型的区别。<br>已知GPU在访存速度和运算速度全面快过CPU。假设如果有很多的访存密集型操作，那可以移动到CPU上进行。由于GPU带宽的限制，访存密集型的操作与CPU速度差别不太大(存疑，我印象中GPU多线程是可以并行访问内存的，虽然总的带宽差不多，但利用率应该差挺多的吧)。<br>到目前为止，异构的收益就剩个利用空闲的cpu这一条好处了。虽然一样会带来数据移动的开销，甚至这个能抵消cpu带来的加速效果。目前就朝这个方向继续进行。<br>关于模型推理中的并行，学长说transformer的算子级并行机会不多。更多是算子内并行。这需要我进一步调查常见LLM模型的算子，尝试算子内并行。</p>
+<p><strong>进一步计划</strong>：</p>
+<ul>
+<li>使用模型可视化工具，查看常见的LLM计算图，并深入了解算子是如何实现的。</li>
+<li>研究transformer相关算子的底层实现，以及学习intel的向量指令集，cuda编程。为高效实现算子内并行提供支撑。</li>
+</ul>
+<hr>
+<p><strong>Purpose</strong>: Conducting a thesis while studying High-Performance Computing (HPC) and Machine Learning Systems (MLSys).</p>
+<p>The plan is to work on accelerating LLM (Language Model) inference. A senior recommended a paper titled “Full Stack Optimization of Transformer Inference: a Survey,” which surveyed a key metric for common models called arithmetic intensity: </p>
+<p>$$ \frac{FLOPs}{MOPs} $$</p>
+<p>Here, MOPs represent the number of memory-related operations (per unit time). The paper indicates that in the case of LLM’s decoder-only transformer during the generation phase, the arithmetic intensity is a constant, approximately equal to 2. This suggests that these operators do not exhibit a significant difference between compute-bound and memory-bound operations.</p>
+<p>It’s known that GPUs generally surpass CPUs in both memory access speed and computational speed. If there are many memory-bound operations, they could potentially be shifted to the CPU for processing. Due to the bandwidth limitations of the GPU, memory-bound operations might not differ significantly in speed between the CPU and GPU (although the general belief may vary; GPUs can effectively utilize parallelism in memory access, even though the total bandwidth might be similar, the efficiency could differ substantially).</p>
+<p>So far, the benefits of heterogeneity mainly revolve around utilizing the idle CPU. However, this might introduce overhead due to data movement, potentially offsetting the acceleration from CPU processing. Current efforts are moving in this direction.</p>
+<p>Regarding parallelism in model inference, the senior mentioned that there might not be many opportunities for operator-level parallelism in transformers. Instead, more parallelism occurs within the operators. This requires further investigation into the operators of common LLM models and attempting intra-operator parallelism.</p>
+<p><strong>Further Plans</strong>:</p>
+<ul>
+<li>Utilize model visualization tools to explore common LLM computation graphs and gain a deep understanding of how operators are implemented.</li>
+<li>Research the underlying implementation of transformer-related operators and study Intel’s vector instruction sets, CUDA programming to support efficient intra-operator parallelism.</li>
+</ul>
 
       
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-11-13T17:15:00+08:00"
-              content="2023-11-13">
-          11-13
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/11/13/2023-11-13/" itemprop="url">
-          <span itemprop="name">数理逻辑，集合论，类型理论，范畴论(Constructing)</span>
-        </a>
-      </div>
-
+    <footer class="post-footer">
+        <div class="post-eof"></div>
       
-    </header>
+    </footer>
   </article>
+</div>
 
-    </div>
-  </div>
-  
-  
-  
+
+
+
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
 
 </div>
   </main>
